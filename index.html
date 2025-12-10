@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abschlussbericht | MB UPS - Ayko Tiedtke</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Styles & Animations */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+
+        .mb-blue { color: #00ADEF; }
+        .bg-mb-blue { background-color: #00ADEF; }
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Scroll Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Animation */
+        .hero-bg {
+            background: radial-gradient(circle at top right, #1a2333 0%, #000000 60%);
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #fff, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Card Hover Effects */
+        .tool-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 173, 239, 0.15);
+            border-color: rgba(0, 173, 239, 0.5);
+        }
+
+        /* Screenshot Tilt Effect Container */
+        .screenshot-container {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .screenshot-card {
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            transform-style: preserve-3d;
+        }
+        .screenshot-container:hover .screenshot-card {
+            transform: rotateY(-5deg) rotateX(5deg) scale(1.02);
+            box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 173, 239, 0.2);
+        }
+        
+        /* Lightbox */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+        #lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 0 50px rgba(0, 173, 239, 0.2);
+        }
+
+        /* Progress Bar Animation */
+        .progress-bar {
+            width: 0%;
+            transition: width 1.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Fullsize Screenshot">
+        <p class="absolute bottom-10 text-gray-400 text-sm">Klicken zum Schließen</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                 
+                    <span class="font-bold text-xl tracking-wider">MB UPS <span class="text-gray-400 font-light">Internship</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#intro" class="hover:text-white text-gray-300 px-3 py-2 rounded-md text-sm font-medium transition">Intro</a>
+                        <a href="#daily" class="hover:text-white text-gray-300 px-3 py-2 rounded-md text-sm font-medium transition">Tagesgeschäft</a>
+                        <a href="#projects" class="hover:text-white text-gray-300 px-3 py-2 rounded-md text-sm font-medium transition">Projekte</a>
+                        <a href="#star" class="hover:text-white text-gray-300 px-3 py-2 rounded-md text-sm font-medium transition">STAR</a>
+                        <a href="#fazit" class="bg-white text-black hover:bg-gray-200 px-4 py-2 rounded-full text-sm font-bold transition">Fazit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center hero-bg overflow-hidden">
+        
+        <!-- === HIER: Hintergrund Platzhalter === -->
+        <div class="absolute inset-0 z-0">
+            <!-- HIER DEIN HINTERGRUNDBILD EINFÜGEN (z.B. Startbild.png) -->
+            <img src="Hintergrund.png" 
+                 alt="Hero Background" 
+                 class="w-full h-full object-cover opacity-60">
+                 
+            <!-- Verlauf/Overlay für bessere Lesbarkeit des Textes -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-black/50 to-black/30"></div>
+        </div>
+        <!-- ==================================== -->
+
+        <!-- Background Decor (Circles) -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-900 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gray-700 rounded-full mix-blend-screen filter blur-[128px] opacity-20"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <div class="inline-block mb-4 px-3 py-1 border border-gray-600 rounded-full text-sm text-gray-300 backdrop-blur-sm bg-black/30">
+                01.09.2025 - 23.12.2025
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight drop-shadow-2xl">
+                <span class="gradient-text">Abschlussbericht</span>
+                <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Praktikum bei MB UPS</span>
+            </h1>
+            <p class="text-xl text-gray-200 mb-8 font-light drop-shadow-md">
+                Mercedes-Benz Used Parts & Services <br>
+                <span class="font-medium text-white">Ayko Tiedtke</span> • Kaufmann im E-Commerce
+            </p>
+            
+ <div class="flex flex-col md:flex-row gap-4 justify-center mt-8">
+                
+                <div class="glass px-6 py-4 rounded-xl text-left border border-gray-500 bg-black/40 backdrop-blur-md">
+                    <p class="text-xs text-gray-400 uppercase">Betreuer</p>
+                    <p class="font-bold text-white">Niko Polatsidis</p>
+                </div>
+
+                <div class="glass px-6 py-4 rounded-xl text-left border border-gray-500 bg-black/40 backdrop-blur-md">
+                    <p class="text-xs text-gray-400 uppercase">Abteilung</p>
+                    <p class="font-bold text-white">Digital & Online Sales</p>
+                </div>
+
+            </div>
+
+            <div class="mt-16 flex justify-center w-full">
+                <a href="#intro" class="animate-bounce text-gray-400 hover:text-white transition-colors">
+                    <i data-lucide="chevron-down" class="w-12 h-12"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Einleitung & Motivation -->
+    <section id="intro" class="py-20 bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl font-bold mb-4">Einleitung & <span class="text-blue-400">Motivation</span></h2>
+                <div class="h-1 w-20 bg-blue-500 mx-auto rounded"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                 <!-- Motivation Text -->
+                <div class="grid gap-6">
+                    <div class="glass p-8 rounded-2xl reveal tool-card" style="transition-delay: 100ms;">
+                        <div class="w-12 h-12 bg-blue-900/50 rounded-lg flex items-center justify-center mb-4 text-blue-400">
+                            <i data-lucide="brain-circuit" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Leidenschaft KI</h3>
+                        <p class="text-gray-400">Großes Interesse an Social Media und Künstlicher Intelligenz. Ziel: Diese Technologien im Business-Kontext anzuwenden.</p>
+                    </div>
+                    
+                    <div class="glass p-8 rounded-2xl reveal tool-card" style="transition-delay: 200ms;">
+                        <div class="w-12 h-12 bg-blue-900/50 rounded-lg flex items-center justify-center mb-4 text-blue-400">
+                            <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">E-Commerce Wissen</h3>
+                        <p class="text-gray-400">Tiefer Einblick in professionelle Online-Handelsstrukturen und Prozesse eines Weltkonzerns.</p>
+                    </div>
+                </div>
+
+                <!-- Screenshot Placeholder: Rim Sale (PDF Seite 3) -->
+                <div class="reveal screenshot-container" onclick="openLightbox(this.querySelector('img').src)">
+                    <div class="screenshot-card relative rounded-2xl overflow-hidden border border-gray-700 group">
+                        <!-- REPLACE SRC WITH YOUR IMAGE: e.g., 'rim_sale.jpg' -->
+                        <img src="RimSale.png" alt="Rim Sale Screenshot" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded">Projekt</span>
+                            <h4 class="text-white font-bold mt-1">Rim Sale Visualisierung</h4>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-black/50 p-2 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition">
+                             <i data-lucide="maximize-2" class="w-5 h-5 text-white"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tagesgeschäft -->
+    <section id="daily" class="py-20 bg-[#0f0f11]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16 items-start">
+                <div class="reveal sticky top-24">
+                    <h2 class="text-3xl font-bold mb-6">Mein <span class="text-blue-400">Tagesgeschäft</span></h2>
+                    <p class="text-xl text-gray-300 mb-6 italic">"Kein Tag ist wie der andere!"</p>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Flexibilität war der Schlüssel. Jeden Tag gab es neue Herausforderungen, von der technischen Pflege des Webshops bis hin zur strategischen Analyse.
+                    </p>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="mail" class="text-blue-400"></i>
+                            <span>Newsletter-Erstellung & Reporting</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="layout-template" class="text-blue-400"></i>
+                            <span>Frontend-Anpassungen im Shop</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="bar-chart-3" class="text-blue-400"></i>
+                            <span>Marktanalysen (Rim Sale, Winter Wheels)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="code-2" class="text-blue-400"></i>
+                            <span>Erstellung eigener Programme zur Automatisierung</span>
+                        </li>
+                    </ul>
+
+                    <div class="mt-8 glass p-6 rounded-xl border border-gray-800">
+                        <h3 class="text-sm font-semibold mb-4 text-gray-400 uppercase tracking-wider">Genutzte Tools</h3>
+                        <div class="flex flex-wrap gap-2">
+                             <span class="px-3 py-1 bg-gray-800 rounded-full text-sm text-gray-300">Gemini AI</span>
+                             <span class="px-3 py-1 bg-gray-800 rounded-full text-sm text-gray-300">Oxid Backend</span>
+                             <span class="px-3 py-1 bg-gray-800 rounded-full text-sm text-gray-300">Retarus</span>
+                             <span class="px-3 py-1 bg-gray-800 rounded-full text-sm text-gray-300">Excel/PowerPoint</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Visual Gallery for Daily Tasks -->
+                <div class="grid gap-6">
+                    <!-- Screenshot 1: Winter Wheels (PDF S. 4) -->
+                    <div class="reveal screenshot-container" onclick="openLightbox(this.querySelector('img').src)">
+                        <div class="screenshot-card relative rounded-xl overflow-hidden border border-gray-700 shadow-xl group">
+                            <!-- REPLACE SRC -->
+                            <img src="Newsletter.png" alt="Winter Wheels" class="w-full object-cover opacity-90 group-hover:opacity-100 transition">
+                             <div class="absolute bottom-0 w-full bg-gradient-to-t from-black p-4">
+                                <p class="text-white font-medium text-sm">Kampagnen-Management: Winter Wheels</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Screenshot 2: Newsletter Editor / Backend (PDF S. 4/7) -->
+                    <div class="reveal screenshot-container" onclick="openLightbox(this.querySelector('img').src)" style="transition-delay: 100ms;">
+                        <div class="screenshot-card relative rounded-xl overflow-hidden border border-gray-700 shadow-xl group">
+                             <!-- REPLACE SRC -->
+                            <img src="Backend-CMS.png" alt="Backend View" class="w-full object-cover opacity-90 group-hover:opacity-100 transition">
+                            <div class="absolute bottom-0 w-full bg-gradient-to-t from-black p-4">
+                                <p class="text-white font-medium text-sm">Visual CMS & Backend Pflege</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Screenshot 3: Excel Analysis (PDF S. 6) -->
+                    <div class="reveal screenshot-container" onclick="openLightbox(this.querySelector('img').src)" style="transition-delay: 200ms;">
+                        <div class="screenshot-card relative rounded-xl overflow-hidden border border-gray-700 shadow-xl group">
+                             <!-- REPLACE SRC -->
+                            <img src="Marktanalyse.png" alt="Analytics" class="w-full object-cover opacity-90 group-hover:opacity-100 transition">
+                            <div class="absolute bottom-0 w-full bg-gradient-to-t from-black p-4">
+                                <p class="text-white font-medium text-sm">Marktanalyse & Reporting</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Projects: My Tools -->
+    <section id="projects" class="py-20 bg-black relative">
+        <div class="absolute inset-0 bg-blue-900/5 clip-path-polygon"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="text-blue-400 font-bold tracking-wider uppercase text-sm">Effizienz durch Eigenentwicklung</span>
+                <h2 class="text-4xl font-bold mt-2">Meine MB UPS <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-white">Tools</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Tool 1 -->
+                <div class="glass p-6 rounded-xl border-t-4 border-blue-500 tool-card reveal">
+                    <div class="flex justify-between items-start mb-4">
+                        <i data-lucide="link" class="w-8 h-8 text-white"></i>
+                        <span class="text-xs font-mono bg-blue-900/30 text-blue-300 px-2 py-1 rounded">&lt;/&gt;</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">UTM-Generator</h3>
+                    <p class="text-sm text-gray-400">Erstellt schnell und fehlerfrei UTM-Parameter für präzises Kampagnen-Tracking.</p>
+                </div>
+
+                <!-- Tool 2 -->
+                <div class="glass p-6 rounded-xl border-t-4 border-green-500 tool-card reveal" style="transition-delay: 100ms;">
+                    <div class="flex justify-between items-start mb-4">
+                        <i data-lucide="languages" class="w-8 h-8 text-white"></i>
+                        <span class="text-xs font-mono bg-green-900/30 text-green-300 px-2 py-1 rounded">HTML</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">HTML-Translator</h3>
+                    <p class="text-sm text-gray-400">Übersetzt Texte innerhalb von HTML-Code, ohne die Struktur zu zerstören.</p>
+                </div>
+
+                <!-- Tool 3 -->
+                <div class="glass p-6 rounded-xl border-t-4 border-purple-500 tool-card reveal" style="transition-delay: 200ms;">
+                    <div class="flex justify-between items-start mb-4">
+                        <i data-lucide="file-diff" class="w-8 h-8 text-white"></i>
+                        <span class="text-xs font-mono bg-purple-900/30 text-purple-300 px-2 py-1 rounded">XLSX</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Excel-Comparison</h3>
+                    <p class="text-sm text-gray-400">Vergleicht zwei Excel-Tabellen und hebt Unterschiede für Updates hervor.</p>
+                </div>
+
+                <!-- Tool 4 -->
+                <div class="glass p-6 rounded-xl border-t-4 border-orange-500 tool-card reveal" style="transition-delay: 300ms;">
+                    <div class="flex justify-between items-start mb-4">
+                        <i data-lucide="hash" class="w-8 h-8 text-white"></i>
+                        <span class="text-xs font-mono bg-orange-900/30 text-orange-300 px-2 py-1 rounded">GEN</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Articlenumber Gen</h3>
+                    <p class="text-sm text-gray-400">Generiert einzigartige und formatierte Artikelnummern nach Mustern.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STAR Method Section -->
+    <section id="star" class="py-20 bg-[#121212]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 reveal text-center md:text-left">
+                <h2 class="text-3xl font-bold mb-2">Projekt Highlight: <span class="text-blue-400">Rims Mix&Match</span></h2>
+                <p class="text-gray-400">Die STAR-Methode in Aktion</p>
+            </div>
+
+            <!-- Visual for STAR Project (PDF Seite 6) -->
+             <div class="mb-12 reveal screenshot-container max-w-4xl mx-auto" onclick="openLightbox(this.querySelector('img').src)">
+                <div class="screenshot-card relative rounded-xl overflow-hidden border border-gray-700 shadow-2xl group">
+                     <!-- REPLACE SRC -->
+                    <img src="Vergleichstool.png" alt="Excel Tool" class="w-full object-cover opacity-90 group-hover:opacity-100 transition">
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                         <div class="bg-black/60 backdrop-blur px-6 py-3 rounded-full border border-gray-600">
+                             <span class="text-blue-400 font-mono font-bold">Action:</span> <span class="text-white">Automatisiertes Vergleichs-Tool</span>
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative">
+                <!-- Connecting Line (Desktop) -->
+                <div class="hidden md:block absolute top-8 left-0 w-full h-1 bg-gray-800 -z-10"></div>
+                
+                <div class="grid md:grid-cols-4 gap-8">
+                    <!-- S -->
+                    <div class="reveal relative bg-[#1a1a1a] p-6 rounded-lg border border-gray-800 shadow-lg">
+                        <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-2xl font-black mb-4 mx-auto md:mx-0 -mt-10 border-4 border-[#121212]">S</div>
+                        <h4 class="text-xl font-bold mb-2 text-blue-400">Situation</h4>
+                        <p class="text-sm text-gray-300">Neue Mix & Match Produkte benötigten manuelle Pflege von Artikeldaten im Shop.</p>
+                    </div>
+
+                    <!-- T -->
+                    <div class="reveal relative bg-[#1a1a1a] p-6 rounded-lg border border-gray-800 shadow-lg" style="transition-delay: 200ms;">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-2xl font-black mb-4 mx-auto md:mx-0 -mt-10 border-4 border-[#121212]">T</div>
+                        <h4 class="text-xl font-bold mb-2 text-blue-400">Task</h4>
+                        <p class="text-sm text-gray-300">Vergleich zweier Excel-Listen, Markierung von Unterschieden und Erstellung einer CSV-Datei ("add"/"delete").</p>
+                    </div>
+
+                    <!-- A -->
+                    <div class="reveal relative bg-[#1a1a1a] p-6 rounded-lg border border-gray-800 shadow-lg" style="transition-delay: 400ms;">
+                        <div class="w-16 h-16 bg-blue-400 rounded-full flex items-center justify-center text-2xl font-black mb-4 mx-auto md:mx-0 -mt-10 border-4 border-[#121212]">A</div>
+                        <h4 class="text-xl font-bold mb-2 text-blue-400">Action</h4>
+                        <p class="text-sm text-gray-300">Entwicklung eines Programms, das den Vergleich und die CSV-Erstellung komplett automatisiert.</p>
+                    </div>
+
+                    <!-- R -->
+                    <div class="reveal relative bg-[#1a1a1a] p-6 rounded-lg border border-gray-800 shadow-lg" style="transition-delay: 600ms;">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-2xl font-black mb-4 mx-auto md:mx-0 -mt-10 border-4 border-[#121212]">R</div>
+                        <h4 class="text-xl font-bold mb-2 text-green-400">Result</h4>
+                        <p class="text-sm text-gray-300">Fehlerfreie Funktion & massive Zeitersparnis: 30-45 Minuten pro Vorgang gewonnen.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MB Mailing Stats -->
+    <section class="py-24 bg-gradient-to-r from-blue-900/40 to-black text-white overflow-hidden border-y border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Left Column: Stats & Description -->
+                <div class="text-left md:pr-8">
+                    <span class="text-blue-400 font-bold tracking-wider uppercase text-sm mb-2 block reveal">Newsletter Projekt</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 reveal">MB-Mailing <br><span class="text-gray-400 font-light">Kampagne</span></h2>
+                    <p class="text-gray-300 mb-10 text-lg leading-relaxed reveal">
+                        Erfolgreicher Versand des Mitarbeiter-Newsletters. Technisch optimiert für mobile Endgeräte und Desktop-Clients, um maximale Reichweite zu garantieren.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-y-10 gap-x-6">
+                        <div class="reveal border-l-2 border-blue-500 pl-4">
+                            <div class="text-3xl font-black text-blue-300 count-up" data-target="113123">0</div>
+                            <div class="text-xs uppercase tracking-wide mt-1 opacity-70">Empfänger</div>
+                        </div>
+                        <div class="reveal border-l-2 border-blue-500 pl-4">
+                            <div class="text-3xl font-black text-blue-300 count-up" data-target="4">0</div>
+                            <div class="text-xs uppercase tracking-wide mt-1 opacity-70">Versandwellen</div>
+                        </div>
+                        <div class="reveal border-l-2 border-green-500 pl-4">
+                            <div class="text-3xl font-black text-green-400">98,12%</div>
+                            <div class="text-xs uppercase tracking-wide mt-1 opacity-70">Erfolgsquote</div>
+                        </div>
+                        <div class="reveal border-l-2 border-green-500 pl-4">
+                            <div class="text-3xl font-black text-green-400">Top</div>
+                            <div class="text-xs uppercase tracking-wide mt-1 opacity-70">Click-Through-Rate</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Portrait/Mobile Image Container -->
+                <div class="reveal relative mx-auto w-full max-w-sm mt-8 md:mt-0">
+                     <!-- Phone/Portrait Frame: Designed for 9:16 aspect ratio images -->
+                     <div class="screenshot-container rounded-3xl overflow-hidden border-8 border-gray-800 shadow-2xl bg-gray-900 aspect-[9/16] relative z-10" onclick="openLightbox(this.querySelector('img').src)">
+                        <!-- REPLACE SRC: Your Portrait/Hochformat Screenshot Here -->
+                        <img src="MB-Mailing.png" alt="Newsletter Mobile View" class="w-full h-full object-cover opacity-90 hover:opacity-100 transition duration-500">
+                        
+                        <!-- Shine Effect -->
+                        <div class="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-white/10 to-transparent pointer-events-none"></div>
+                     </div>
+                     
+                     <!-- Ambient Background Glow -->
+                     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-blue-600/30 blur-[60px] -z-10 rounded-full animate-pulse"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Theorie vs Praxis & Challenges -->
+    <section class="py-20 bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Challenges -->
+                <div class="reveal">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                        <i data-lucide="mountain-snow" class="text-red-400"></i> Herausforderungen
+                    </h3>
+                    <div class="glass p-6 rounded-xl border-l-4 border-red-500">
+                        <ul class="space-y-4 text-gray-300">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="alert-circle" class="w-5 h-5 mt-1 text-red-400 shrink-0"></i>
+                                <div>
+                                    <strong class="text-white">Autospezifisches Fachwissen:</strong>
+                                    <br>Tiefe technische Details der Teile.
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="alert-circle" class="w-5 h-5 mt-1 text-red-400 shrink-0"></i>
+                                <div>
+                                    <strong class="text-white">Interne Terminologie:</strong>
+                                    <br>Viele spezifische Begriffe und Abkürzungen.
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="mt-4 p-3 bg-white/5 rounded text-sm text-gray-400 italic">
+                            <span class="text-green-400 font-bold">Lösung:</span> Intensives Selbststudium mit KI & enge Zusammenarbeit mit dem Team.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learnings -->
+                <div class="reveal">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                        <i data-lucide="graduation-cap" class="text-green-400"></i> Neue Skills
+                    </h3>
+                    
+                    <!-- Optional: Photo from PDF Page 9 (Working on Laptop) -->
+                    <div class="mb-6 screenshot-container rounded-lg overflow-hidden h-40 border border-gray-800" onclick="openLightbox(this.querySelector('img').src)">
+                        <!-- REPLACE SRC -->
+                        <img src="Laptoparbeit.png" class="w-full h-full object-cover opacity-60 hover:opacity-100 transition">
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-[#1a1a1a] p-4 rounded-lg flex justify-between items-center">
+                            <span>KI-Anwendung & Webshop</span>
+                            <span class="bg-blue-900 text-blue-200 text-xs px-2 py-1 rounded">Hard Skill</span>
+                        </div>
+                        <div class="bg-[#1a1a1a] p-4 rounded-lg flex justify-between items-center">
+                            <span>Fahrzeugkenntnisse & Google ADS</span>
+                            <span class="bg-blue-900 text-blue-200 text-xs px-2 py-1 rounded">Hard Skill</span>
+                        </div>
+                        <div class="bg-[#1a1a1a] p-4 rounded-lg flex justify-between items-center">
+                            <span>Zeitmanagement & Priorisierung</span>
+                            <span class="bg-green-900 text-green-200 text-xs px-2 py-1 rounded">Soft Skill</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fazit -->
+    <section id="fazit" class="py-24 bg-[#050505] text-center relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-600 to-transparent"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 relative z-10 reveal">
+            <i data-lucide="quote" class="w-12 h-12 text-blue-500 mx-auto mb-6 opacity-50"></i>
+            <blockquote class="text-2xl md:text-4xl font-medium leading-relaxed mb-8 text-white">
+                "Das Arbeitsklima und die Betreuung waren so gut, dass ich gar nicht mehr gehen möchte."
+            </blockquote>
+            <div class="flex justify-center items-center gap-2 mb-12">
+                <i data-lucide="thumbs-up" class="text-green-500 fill-current"></i>
+                <span class="text-xl font-bold text-gray-300">Empfehlung: Definitiv, in allen Punkten!</span>
+            </div>
+
+<div class="glass inline-block px-8 py-6 rounded-2xl border border-gray-800 w-full max-w-4xl">
+    <h4 class="text-gray-400 text-sm uppercase mb-4 text-center">Ausblick & Zukunft</h4>
+    
+    <div class="flex flex-wrap gap-4 justify-center">
+        
+        <div class="px-5 py-3 rounded-xl bg-gray-800/50 border border-gray-700/50 flex items-center gap-3">
+            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+            <span>Weiterhin im E-Commerce tätig sein</span>
+        </div>
+
+        <div class="px-5 py-3 rounded-xl bg-gray-800/50 border border-gray-700/50 flex items-center gap-3">
+            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+            <span>Vertiefung KI & Online Marketing</span>
+        </div>
+
+        <div class="px-5 py-3 rounded-xl bg-gray-800/50 border border-gray-700/50 flex items-center gap-3">
+            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+            <span>Erneutes Praktikum bei MB UPS</span>
+        </div>
+
+    </div>
+</div>
+    </section>
+
+    <footer class="bg-black py-8 border-t border-gray-900 text-center text-gray-600 text-sm">
+        <p>Vielen Dank! Bis (hoffentlich) nächstes Jahr.</p>
+        <p class="mt-2">Mercedes-Benz Used Parts & Services • Abschlussbericht Ayko Tiedtke</p>
+    </footer>
+
+    <script>
+        // Init Lucide Icons
+        lucide.createIcons();
+
+        // Scroll Reveal Logic
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        reveal();
+
+        // Simple Counter Animation
+        const counters = document.querySelectorAll('.count-up');
+        let hasAnimated = false;
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const duration = 2000; // ms
+                const increment = target / (duration / 16); // 60fps
+
+                let current = 0;
+                const updateCount = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current).toLocaleString('de-DE');
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        counter.innerText = target.toLocaleString('de-DE');
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        const statsSection = document.querySelector('.count-up').closest('section');
+        window.addEventListener('scroll', () => {
+            if (!hasAnimated && statsSection.getBoundingClientRect().top < window.innerHeight) {
+                animateCounters();
+                hasAnimated = true;
+            }
+        });
+
+        // Lightbox Functions
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Stop scrolling
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Resume scrolling
+        }
+
+    </script>
+</body>
+</html>
